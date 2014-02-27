@@ -3,17 +3,27 @@ var main;
 main = function($scope, $http){
   $scope.hash = [];
   $scope.change = function(){
-    var hash, sentence, count, comma, i$, i, b, idx, cidx;
+    var hash, sentence1, sentence2, sentence, heading, count, p1max, p2max, comma, i$, i, b, idx, cidx;
     hash = $scope.hash;
-    sentence = [];
+    sentence1 = [];
+    sentence2 = [];
+    sentence = sentence1;
+    heading = "";
     count = 1;
+    p1max = 25;
+    p2max = 45;
     comma = ['，', '，', '；', '。', '。', '。'];
     for (i$ = 6; i$ <= 99; ++i$) {
       i = i$;
-      if (!hash[i]) {
+      if (Math.random() * 10 < 3 || !hash[i]) {
         continue;
       }
       b = hash[i];
+      if (sentence1.length >= p1max * 2 && heading === "") {
+        heading = b[idx];
+        sentence = sentence2;
+        continue;
+      }
       idx = parseInt(Math.random() * b.length);
       sentence.push(b[idx]);
       cidx = parseInt(Math.random() * count);
@@ -22,12 +32,18 @@ main = function($scope, $http){
       } else {
         count++;
       }
-      if (i === 99) {
+      if (i === 99 || sentence1.length === 2 * p1max - 1) {
         cidx = comma.length - 1;
       }
       sentence.push(comma[cidx]);
+      if (sentence2.length > 2 * p2max) {
+        break;
+      }
     }
-    return $scope.content = sentence.join("");
+    sentence[sentence.length - 1] = "。";
+    $scope.content1 = sentence1.join("");
+    $scope.content2 = sentence2.join("");
+    return $scope.heading = heading;
   };
   return $http.get('sentence-stat.json').success(function(hash){
     $scope.hash = hash;

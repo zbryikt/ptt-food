@@ -22,7 +22,11 @@
   <body ng-app ng-controller="main">
     <div class="top">
       <h1>用批踢踢美食版文章合成，鼎王食記產生器！</h1>
-      <div class="content">{{content}}</div>
+      <div class="content">
+        <p>{{content1}}</p>
+        <h3>{{heading}}</h3>
+        <p>{{content2}}</p>
+      </div>
       <div class="footer">
         <div data-href="http://zbryikt.github.io/ptt-food/" data-layout="box_count" data-action="like" data-show-faces="true" data-share="true" class="fb-like"></div>So，要吃鼎王了嗎？<br>
         <div ng-click="change()" class="btn btn-danger">我要更多！</div>
