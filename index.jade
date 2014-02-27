@@ -1,0 +1,35 @@
+doctype html
+//- basic libraries: jquery(1.10.2), d3js(3.3.11), angularjs(1.2.3), bootstrap(3.0)/semantic-ui(0.9.3/0.9.5)
+- var usecdn = false
+- var useog = true
+- var lib = { jquery: true, d3js: true, angular: true, bootstrap: true, semantic: false }
+- var assets = "assets"
+- var thumbnail = "http://zbryikt.github.io/ptt-food/thumbnail.png"
+html(lang="en")
+  head(prefix="og: http://ogp.me/ns#")
+    meta(charset="utf-8")
+    title template
+    // libraries
+    include library.jade
+    // custom files
+    link(rel="stylesheet",type="text/css",href="index.css")
+    script(type="text/javascript",src="index.js")
+  body(ng-app,ng-controller="main")
+    .top
+      h1 用批踢踢美食版文章合成，鼎王食記產生器！
+      .content
+        {{content}}
+      .footer
+        .fb-like(data-href="http://zbryikt.github.io/ptt-food/",data-layout="box_count",data-action="like",data-show-faces="true",data-share="true")
+        | So，要吃鼎王了嗎？
+        br
+        .btn.btn-danger(ng-click="change()") 我要更多！
+    #fb-root
+    script.
+      (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/zh_TW/all.js#xfbml=1&appId=209807835852654";
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
